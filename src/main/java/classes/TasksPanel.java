@@ -1,6 +1,6 @@
 // TasksPanel.java
 // Developer: CJ Quintero
-// Last Updated 04/02/2024
+// Last Updated 04/02/2025
 //
 // This class makes the Tasks panel.
 // This is where you can see the tasks from the array

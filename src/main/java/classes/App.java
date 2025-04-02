@@ -1,6 +1,6 @@
 // App.java
 // Developer: CJ Quintero
-// Last Updated 04/02/2024
+// Last Updated 04/02/2025
 //
 // This class is the main object that is created to run the
 // whole app. It has the frame, tasks panel, and the button panel

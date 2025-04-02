@@ -1,6 +1,6 @@
 // Main.java
 // Developer: CJ Quintero
-// Last Updated 04/02/2024
+// Last Updated 04/02/2025
 //
 // Class with the main method. An App object is made then the runApp()
 // method is called.
