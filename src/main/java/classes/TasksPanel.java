@@ -1,6 +1,6 @@
 // TasksPanel.java
 // Developer: CJ Quintero
-// Last Updated 04/02/2025
+// Last Updated 04/03/2025
 //
 // This class makes the Tasks panel.
 // This is where you can see the tasks from the array
@@ -12,46 +12,75 @@ package classes;
 
 import javax.swing.*;
 import java.awt.*;
-
+import java.util.ArrayList;
 
 public class TasksPanel extends JPanel
 {
     // fields
-    private String[] tasksArray = null;
-    private JList<String> list = null;
+    private ArrayList<Task> taskArrayList = null;
+    private DefaultListModel<Task> taskListModel = null;
+    private JList<Task> taskList = null;
     private JScrollPane scrollPane = null;
-
 
     // constants
     public final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 16);
-    public final int ARRAY_SIZE = 3;
-
 
     public TasksPanel()
     {
         // make the objects
-        tasksArray = new String[ARRAY_SIZE];
-        list = new JList<>(tasksArray);
-        scrollPane = new JScrollPane(list);
+        taskArrayList = new ArrayList<>();
+        taskListModel = new DefaultListModel<>();
+        taskList = new JList(taskListModel);
+        scrollPane = new JScrollPane(taskList);
 
         // set layout
-        setLayout(new BorderLayout());
-    }
+        this.setLayout(new BorderLayout());
 
+        // set some attributes of the list
+        taskList.setFont(DEFAULT_FONT);
+        taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-    public void makeTasksPanel()
-    {
-        // scroll bar only shows up when needed in the scroll pane
+        // set location in the main panel
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-        // add some example tasks
-        tasksArray[0] = "Task 1";
-        tasksArray[1] = "Task 2";
-        tasksArray[2] = "Task 3";
-
-        // add the scroll pane (with the list) to the panel
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
+    // add tasks dynamically
+    public void addTask(Task task)
+    {
+        // add the new task to the array list
+        taskArrayList.add(task);
+
+        // then add the task to the list model to update the list
+        taskListModel.addElement(task);
+    }
+
+    // remove tasks dynamically
+    public void deleteTask(Task task)
+    {
+        // remove from array list
+        taskArrayList.remove(task);
+
+        // remove from list model to update list
+        taskListModel.removeElement(task);
+    }
+
+    // getter for the array list
+    public ArrayList<Task> getArrayList()
+    {
+        return taskArrayList;
+    }
+
+    // getter for the selected task
+    public Task getSelectedTask()
+    {
+        return taskList.getSelectedValue();
+    }
+
+    // refreshes the display
+    public void refreshList()
+    {
+        taskList.repaint();
+    }
 
 } // end class
