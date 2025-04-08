@@ -1,43 +1,44 @@
-// App.java
-// Developer: CJ Quintero
-// Last Updated 04/03/2025
-//
-// This class is the main object that is created to run the
-// whole app. It has the frame, tasks panel, and the button panel
-package classes;
+/*
+    Developer CJ Quintero
+    Last Updated 04/08/2025
+    App.java
 
+    This class contains the main classes as
+     attributes to make the app.
+ */
+package classes;
 
 import javax.swing.*;
 import java.awt.*;
 
-
 public class App
 {
-    //fields
-    private JFrame frame = null;
-    private TasksPanel tasksPanel = null;
-    private ButtonPanel buttonPanel = null;
+    // fields
+    JFrame frame = null;
+    TablePanel tablePanel = null;
+    ButtonPanel buttonPanel = null;
 
-
+    // constructor
     public App()
     {
-        // make the objects
-        frame = new JFrame("To Do List");
-        tasksPanel = new TasksPanel();
-        buttonPanel = new ButtonPanel(tasksPanel);
+        // initialize the objects
+        frame = new JFrame("To Do List"); // title
+        tablePanel = new TablePanel();
+        buttonPanel = new ButtonPanel();
 
-        // set attributes of the frame
+        // set some attributes
+        frame.setSize(800, 600);
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
 
-        // add the objects
-        frame.add(tasksPanel, BorderLayout.CENTER);
+
+        // add the panels
+        frame.add(tablePanel, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
-        // show the frame (keep last)
+        // show the frame
         frame.setVisible(true);
-    }
+    } // end constructor
 
 } // end class

@@ -1,9 +1,11 @@
-// Main.java
-// Developer: CJ Quintero
-// Last Updated 04/03/2025
-//
-// Class with the main method. An App object is made then the runApp()
-// method is called.
+/*
+    Developer CJ Quintero
+    Last Updated 04/08/2025
+    Main.java
+
+    This program is to learn setting up a database
+    working with a simple to do list.
+ */
 package classes;
 
 public class Main
