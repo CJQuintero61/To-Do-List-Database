@@ -1,6 +1,6 @@
 /*
     Developer CJ Quintero
-    Last Updated 04/08/2025
+    Last Updated 04/09/2025
     App.java
 
     This class contains the main classes as
@@ -17,6 +17,7 @@ public class App
     JFrame frame = null;
     TablePanel tablePanel = null;
     ButtonPanel buttonPanel = null;
+    TaskList taskList = null;
 
     // constructor
     public App()
@@ -24,7 +25,8 @@ public class App
         // initialize the objects
         frame = new JFrame("To Do List"); // title
         tablePanel = new TablePanel();
-        buttonPanel = new ButtonPanel();
+        taskList = new TaskList();
+        buttonPanel = new ButtonPanel(taskList, tablePanel.getTableModel(), tablePanel.getTable());
 
         // set some attributes
         frame.setSize(800, 600);
@@ -36,6 +38,7 @@ public class App
         // add the panels
         frame.add(tablePanel, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.SOUTH);
+
 
         // show the frame
         frame.setVisible(true);
