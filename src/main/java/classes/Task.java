@@ -1,9 +1,10 @@
-/*
-    Developer CJ Quintero
-    Last Updated 04/09/2025
-    Task.java
-
-    This class makes task objects
+/**
+ * This class makes task objects
+ *
+ * @file Task.java
+ * @author CJ Quintero
+ * @date 04/16/2025
+ * @version 1.0
  */
 package classes;
 
@@ -14,7 +15,13 @@ public class Task
     String date = null;
     boolean completion = false;
 
-    // parameterized constructor
+
+    /**
+     * constructor
+     *
+     * @param name - task name
+     * @param date - task date
+     */
     public Task(String name, String date)
     {
         this.name = name;
@@ -22,27 +29,33 @@ public class Task
         this.completion = false;
     }
 
-    // setters
+    /**
+     * setters
+     */
     public void setTaskName(String name) { this.name = name; }
     public void setTaskDate(String date) { this.date = date; }
     public void setTaskCompletion(boolean completion) { this.completion = completion; }
 
-    // getters
+    /**
+     * getters
+     */
     public String getTaskName() { return name; }
     public String getTaskDate() { return date; }
     public boolean getTaskCompletion() { return completion; }
 
-    // toggle between task completed and in progress
-    // if "true" set to "false"
-    // if "false" set to "true"
+    /**
+     * toggle between a task being completed or in progress.
+     * Flips the polarity of the bool value
+     */
     public void toggleCompletion()
     {
         this.completion = !this.completion;
     }
 
-    // show the status depending on the completion
-    // if "in progress" set to "completed"
-    // if "completed" set to "in progress"
+    /**
+     * @return - the status string depends on the value
+     * of completion
+     */
     public String getTaskStatus()
     {
         if(completion)

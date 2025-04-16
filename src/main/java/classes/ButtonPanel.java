@@ -1,10 +1,11 @@
-/*
-    Developer CJ Quintero
-    Last Updated 04/09/2025
-    ButtonPanel.java
-
-    This class makes the button panel for
-    the app class
+/**
+ * This class makes the button panel for
+ * the app class
+ *
+ * @file ButtonPanel.java
+ * @author CJ Quintero
+ * @date 04/16/2025
+ * @version 1.0
  */
 package classes;
 
@@ -22,15 +23,24 @@ public class ButtonPanel extends JPanel
     DefaultTableModel tableModel = null;
     JTable table = null;
 
-    // constructor
+    /**
+     * constructor - creates the button panel and adds
+     * action listeners to the buttons
+     *
+     * @param taskList - reference to task list from App class
+     * @param tableModel - reference to the table model from App class
+     * @param table - reference to the JTable from App
+     */
     public ButtonPanel (TaskList taskList, DefaultTableModel tableModel, JTable table)
     {
         newTaskButton = new JButton("New Task");
         editTaskButton = new JButton("Edit Task");
         deleteTaskButton = new JButton("Delete Task");
-        this.taskList = taskList; // reference to the task list from App
-        this.tableModel = tableModel; // reference to the table model from App
-        this.table = table; // reference to the JTable from App
+
+        // references
+        this.taskList = taskList;
+        this.tableModel = tableModel;
+        this.table = table;
 
 
         // add action listeners
@@ -44,12 +54,15 @@ public class ButtonPanel extends JPanel
         this.add(deleteTaskButton);
     }
 
+    /**
+     * creates a new task, adds it to the task list, then
+     * updates the table to display properly
+     */
     public void newTaskButtonClicked()
     {
         String taskName = null;
         String taskDate = null;
 
-        // Try to get the name
         try
         {
             // get the task name
@@ -58,17 +71,14 @@ public class ButtonPanel extends JPanel
 
             taskName = taskName.trim(); // trim white space
         }
-        // occurs when cancel or the X button is clicked,
-        // or for any other problem that may occur
         catch (Exception e)
         {
-            // end the method if an exception is caught. This prevents
-            // more input boxes from appearing if the user clicks cancel or the X
-            System.out.println("ButtonPanel.java -> newTaskButtonClicked: " + e.getMessage());
+            // prevent more dialog boxes from appearing
+            // and log the error to console
+            System.out.println("ButtonPanel.java -> newTaskButtonClicked -> taskName exception " + e.getMessage());
             return;
         }
 
-        // try to get the date
         try
         {
             // get the task date
@@ -77,13 +87,11 @@ public class ButtonPanel extends JPanel
 
             taskDate = taskDate.trim(); // trim white space
         }
-        // occurs when cancel or the X button is clicked,
-        // or for any other exceptions that may occur
         catch(Exception e)
         {
-            // end the method if an exception is caught. This prevents
-            // more input boxes from appearing if the user clicks cancel or the X
-            System.out.println("ButtonPanel.java -> newTaskButtonClicked: " + e.getMessage());
+            // prevent more dialog boxes from appearing
+            // and log error
+            System.out.println("ButtonPanel.java -> newTaskButtonClicked -> taskDate exception " + e.getMessage());
             return;
         }
 
@@ -94,8 +102,6 @@ public class ButtonPanel extends JPanel
             String[] row = {taskName, taskDate, "In Progress"};
             tableModel.addRow(row);
             refreshTableModel();
-
-            System.out.println("ButtonPanel.java -> newTaskButtonClicked(): Task added and table refreshed");
         }
         // if the name is empty, and the date is filled
         else if(taskName.isEmpty() && !taskDate.isEmpty())
@@ -123,13 +129,21 @@ public class ButtonPanel extends JPanel
         // catch any other errors that may occur
         else
         {
+            // tell user of unknown error
             JOptionPane.showMessageDialog(null,
                     "Cannot make new task: An unknown error has occurred.",
                     "Error", JOptionPane.ERROR_MESSAGE);
+
+            // log error
+            System.out.println("ButtonPanel.java -> newTaskButtonClicked ->" +
+                    " taskName and taskDate exception -> unknown error");
         }
 
     } // end newTaskButtonClicked
 
+    /**
+     * allows users to change a selected task from the table
+     */
     public void editTaskButtonClicked()
     {
         int row = table.getSelectedRow();
@@ -152,8 +166,10 @@ public class ButtonPanel extends JPanel
         }
     } // end editTaskButtonClicked
 
-    // method for clearing the rows and re-adding them
-    // to the table to update the display
+    /**
+     * refreshes the table to show the new list after
+     * adding, editing, or removing a task
+     */
     public void refreshTableModel()
     {
         try

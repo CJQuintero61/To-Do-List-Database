@@ -1,10 +1,11 @@
-/*
-    Developer CJ Quintero
-    Last Updated 04/09/2025
-    TablePanel.java
-
-    This class makes the entire table panel for
-    the app class
+/**
+ * This class makes the entire table panel
+ * for the app class
+ *
+ * @file TablePanel.java
+ * @author CJ Quintero
+ * @date 04/16/2025
+ * @version 1.0
  */
 package classes;
 
@@ -20,7 +21,10 @@ public class TablePanel extends JPanel
     DefaultTableModel tableModel = null;
 
 
-    // constructor
+    /**
+     * constructor - creates the table model and
+     * sets attributes of the table.
+     */
     public TablePanel()
     {
         // make the table model with 3 headers and 0 initial rows
@@ -46,10 +50,17 @@ public class TablePanel extends JPanel
         this.add(scrollPane);
     }
 
-    // to use the tableModel reference in ButtonPanel.java
+    /**
+     * @return - returns the table model to App.java where it
+     * gets passed to the button panel
+     */
     public DefaultTableModel getTableModel() { return tableModel; }
 
-    // to use the table reference in ButtonPanel.java
+
+    /**
+     * @return - returns the table to App.java where it
+     * gets passed to the button panel
+     */
     public JTable getTable() { return table; }
 
 } // end class

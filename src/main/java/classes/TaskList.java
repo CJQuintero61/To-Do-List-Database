@@ -1,9 +1,11 @@
-/*
-    Developer CJ Quintero
-    Last Updated 04/09/2025
-    TaskList.java
-
-    This class makes the list for storing tasks
+/**
+ * This class makes the list for
+ * storing tasks
+ *
+ * @file TaskList.java
+ * @author CJ Quintero
+ * @date 04/16/2025
+ * @version 1.0
  */
 package classes;
 
@@ -15,16 +17,30 @@ public class TaskList
     // fields
     List<Task> list = null;
 
+    /**
+     * constructor - makes the array list object
+     */
     public TaskList()
     {
         list = new ArrayList<Task>();
     }
 
+    /**
+     * makes a new task object then adds it to the
+     * array list
+     *
+     * @param name - task name
+     * @param date - task date
+     */
     public void addTaskToList(String name, String date)
     {
         Task task = new Task(name, date);
         list.add(task);
     }
 
+    /**
+     * @return - the list object to be used in ButtonPanel.java
+     */
     public List<Task> getTaskList() { return list; }
-}
+
+} // end class

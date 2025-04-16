@@ -1,10 +1,11 @@
-/*
-    Developer CJ Quintero
-    Last Updated 04/09/2025
-    App.java
-
-    This class contains the main classes as
-     attributes to make the app.
+/**
+ * This class contains the main classes as
+ * attributes to make the app
+ *
+ * @file App.java
+ * @author CJ Quintero
+ * @date 04/16/2025
+ * @version 1.0
  */
 package classes;
 
@@ -19,7 +20,10 @@ public class App
     ButtonPanel buttonPanel = null;
     TaskList taskList = null;
 
-    // constructor
+    /**
+     * constructor - creates the panels and sets
+     * frame attributes
+     */
     public App()
     {
         // initialize the objects
