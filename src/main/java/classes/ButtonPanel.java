@@ -60,84 +60,45 @@ public class ButtonPanel extends JPanel
      */
     public void newTaskButtonClicked()
     {
+
         String taskName = null;
         String taskDate = null;
 
-        try
-        {
-            // get the task name
-            taskName = JOptionPane.showInputDialog(null, "Enter Task Name",
-                    "New Task", JOptionPane.PLAIN_MESSAGE);
+        // prompts for taskName and validates it
+        taskName = validateTaskName();
 
-            taskName = taskName.trim(); // trim white space
-        }
-        catch (Exception e)
+        if(taskName == null)
         {
-            // prevent more dialog boxes from appearing
-            // and log the error to console
-            System.out.println("ButtonPanel.java -> newTaskButtonClicked -> taskName exception " + e.getMessage());
+            // stop more input boxes from showing
+            return;
+        }
+
+
+        // get input and validate it
+        taskDate = validateTaskDate();
+
+        if(taskDate == null)
+        {
+            // stop more input boxes from showing
             return;
         }
 
         try
         {
-            // get the task date
-            taskDate = JOptionPane.showInputDialog(null, "Enter Task Date",
-                    "New Task", JOptionPane.PLAIN_MESSAGE);
-
-            taskDate = taskDate.trim(); // trim white space
-        }
-        catch(Exception e)
-        {
-            // prevent more dialog boxes from appearing
-            // and log error
-            System.out.println("ButtonPanel.java -> newTaskButtonClicked -> taskDate exception " + e.getMessage());
-            return;
-        }
-
-        // both the name and date must be filled
-        if(!taskName.isEmpty() && !taskDate.isEmpty())
-        {
+            // add the task to the list and refresh table
             taskList.addTaskToList(taskName, taskDate);
             String[] row = {taskName, taskDate, "In Progress"};
             tableModel.addRow(row);
             refreshTableModel();
         }
-        // if the name is empty, and the date is filled
-        else if(taskName.isEmpty() && !taskDate.isEmpty())
+        catch(Exception e)
         {
-            // tell the user that the name cannot be empty
-            JOptionPane.showMessageDialog(null,
-                    "Cannot make new task: Task name cannot be empty.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        // if the name is filled, but the date is empty
-        else if(!taskName.isEmpty() && taskDate.isEmpty())
-        {
-            // tell the user that the date cannot be empty
-            JOptionPane.showMessageDialog(null,
-                    "Cannot make new task: Task date cannot be empty.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        // if both are empty
-        else if(taskName.isEmpty() && taskDate.isEmpty())
-        {
-            JOptionPane.showMessageDialog(null,
-                    "Cannot make new task: Task name and date cannot be empty.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        // catch any other errors that may occur
-        else
-        {
-            // tell user of unknown error
-            JOptionPane.showMessageDialog(null,
-                    "Cannot make new task: An unknown error has occurred.",
+            JOptionPane.showMessageDialog(null, "An unknown error has occurred.",
                     "Error", JOptionPane.ERROR_MESSAGE);
 
-            // log error
-            System.out.println("ButtonPanel.java -> newTaskButtonClicked ->" +
-                    " taskName and taskDate exception -> unknown error");
+            System.out.println(e.getMessage());
         }
+
 
     } // end newTaskButtonClicked
 
@@ -148,22 +109,28 @@ public class ButtonPanel extends JPanel
     {
         int row = table.getSelectedRow();
 
-        // validate the row before doing anything
+        // validate the row first
         if(row >= 0)
         {
-            JOptionPane.showMessageDialog(null, "You selected row " + row,
-                    "Edit Task", JOptionPane.PLAIN_MESSAGE);
+            // proceeds with the rest of the code
         }
-        else if(row == -1) // getSelectedRow returns -1 if no row is selected
+        else if(row == -1) // no row selected
         {
             JOptionPane.showMessageDialog(null, "Select a row to edit first.",
                     "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         else // catch any other errors that may occur
         {
             JOptionPane.showMessageDialog(null, "An unknown error has occurred.",
                     "Error", JOptionPane.ERROR_MESSAGE);
+
+            System.out.println("Unknown Error validating selected row");
+            return;
         }
+
+
+
     } // end editTaskButtonClicked
 
     /**
@@ -188,9 +155,95 @@ public class ButtonPanel extends JPanel
         catch(Exception e)
         {
             // catch any exceptions that may occur
-            System.out.println("ButtonPanel.java -> refreshTableModel: " + e.getMessage());
+            System.out.println("Error refreshing table " + e.getMessage());
         }
 
     } // end refreshTableModel
+
+    /**
+     * gets user input for the task name and validates it
+     *
+     * @return - if
+     */
+    public String validateTaskName()
+    {
+        String taskName = null;
+
+        try
+        {
+            // get the task name
+            taskName = JOptionPane.showInputDialog(null, "Enter Task Name",
+                    "New Task", JOptionPane.PLAIN_MESSAGE);
+
+            // trim white space
+            taskName = taskName.trim();
+
+            // if valid return it
+            if(!taskName.isEmpty())
+            {
+                return taskName;
+            }
+            else
+            {
+                // tell the user that the name cannot be empty
+                JOptionPane.showMessageDialog(null,
+                        "Cannot make new task: Task name cannot be empty.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+
+                return null;
+            }
+
+        } // end try
+        catch (Exception e)
+        {
+            // catch any unknown errors
+            // also catches when user cancels dialog box
+            return null;
+        } // end catch
+
+    } // end validateTaskName
+
+    /**
+     * prompts user for task date and validates it
+     * @return - the taskDate string if valid or null if empty
+     */
+    public String validateTaskDate()
+    {
+        String taskDate = null;
+
+        try
+        {
+            // get the task date
+            taskDate = JOptionPane.showInputDialog(null, "Enter Task Date",
+                    "New Task", JOptionPane.PLAIN_MESSAGE);
+
+            // trim white space
+            taskDate = taskDate.trim();
+
+            // if valid return it
+            if(!taskDate.isEmpty())
+            {
+                return taskDate;
+            }
+            else
+            {
+                // tell the user that the date cannot be empty
+                JOptionPane.showMessageDialog(null,
+                        "Cannot make new task: Task date cannot be empty.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+
+                return null;
+            }
+
+        } // end try
+        catch(Exception e)
+        {
+            // catch any unknown errors
+            // also catches when user cancels dialog box
+            return null;
+        }
+
+    } // end validateTaskDate
+
 
 } // end class
