@@ -8,3 +8,6 @@ Developer: CJ Quintero
 - Edit Task button implementation has begun
 - Button Panel now has references to objects from the Table panel by passing parameters through the app class
 
+Updates for 04/16/2025
+Developer: CJ Quintero
+- improved comments 
