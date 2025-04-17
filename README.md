@@ -10,4 +10,6 @@ Developer: CJ Quintero
 
 Updates for 04/16/2025
 Developer: CJ Quintero
-- improved comments 
+- improved comments
+- added more modularity to newTaskButtonClicked() in ButtonPanel.java when validating taskName and taskDate
+- 
