@@ -12,4 +12,8 @@ Updates for 04/16/2025
 Developer: CJ Quintero
 - improved comments
 - added more modularity to newTaskButtonClicked() in ButtonPanel.java when validating taskName and taskDate
-- 
+
+Updates for 04/17/2025
+Developer: CJ Quintero
+- added functionality to edit task button and delete task button
+- app should be in a stable working order as of this update. Can now create edit and delete tasks.
